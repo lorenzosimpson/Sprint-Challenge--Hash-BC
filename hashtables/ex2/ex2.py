@@ -10,6 +10,8 @@ class Ticket:
     def __init__(self, source, destination):
         self.source = source
         self.destination = destination
+    def __repr__(self):
+        return f'source: {self.source}, destination: {self.destination}'
 
 
 def reconstruct_trip(tickets, length):
@@ -19,5 +21,26 @@ def reconstruct_trip(tickets, length):
     """
     YOUR CODE HERE
     """
+    result = [None] * length
+    for t in tickets:
+        hash_table_insert(hashtable, t.source, t.destination)
 
-    pass
+    
+    print(result)
+
+
+tickets = [
+  Ticket("XNA", "CID"),
+  Ticket("SFO", "BHM"),
+  Ticket("FLG", "XNA"),
+  Ticket("NONE", "LAX"),
+  Ticket("LAX", "SFO"),
+  Ticket("CID", "SLC"),
+  Ticket("ORD", "NONE"),
+  Ticket("SLC", "PIT"),
+  Ticket("BHM", "FLG")
+]
+
+
+ht = HashTable(10)
+reconstruct_trip(tickets, 10)
