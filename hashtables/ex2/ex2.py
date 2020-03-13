@@ -21,16 +21,26 @@ def reconstruct_trip(tickets, length):
     """
     YOUR CODE HERE
     """
-    result = [None] * length
-    for t in tickets:
-        hash_table_insert(hashtable, t.source, t.destination)
+    
+    for t in range(length):
+        hash_table_insert(hashtable, tickets[t].source, tickets[t].destination)
 
-    for n in hashtable.storage:
-        print(n)
+    route[0] = hash_table_retrieve(hashtable, 'NONE')
+
+
+    for i in range(1, len(route)):
+        route[i] = hash_table_retrieve(hashtable, route[i-1])
+
+    route.pop()
+
+    
+    return route
+    
 
 
 
 tickets = [
+  Ticket("PIT","ORD"),
   Ticket("XNA", "CID"),
   Ticket("SFO", "BHM"),
   Ticket("FLG", "XNA"),
@@ -43,5 +53,5 @@ tickets = [
 ]
 
 
-ht = HashTable(10)
-reconstruct_trip(tickets, 10)
+ht = HashTable(16)
+print(reconstruct_trip(tickets, 10))
