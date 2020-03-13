@@ -12,13 +12,20 @@ def get_indices_of_item_weights(weights, length, limit):
     """
     YOUR CODE HERE
     """
-    for w in weights:
-        hash_table_insert(ht, w, weights.index(w))
-    print(ht)
+    if length > 1:
+        for w in range(length):
+            hash_table_insert(ht, weights[w], w)
+            
+        for i in range(length):
+            x = hash_table_retrieve(ht, (limit - weights[i]))
+            if x:
+                if x > i:
+                    print([x, i])
+                    return [x, i]
+                else:
+                    print([i, x])
+                    return [i, x]
 
-    for num in weights:
-        print(hash_table_retrieve(ht, num))
-        
     return None
 
 
@@ -29,4 +36,4 @@ def print_answer(answer):
         print("None")
 
 new_table = HashTable(2)
-get_indices_of_item_weights([ 4, 6, 10, 15, 16 ], 5, 21)
+get_indices_of_item_weights([4, 6, 10, 15, 16], 5, 21)

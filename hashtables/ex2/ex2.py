@@ -25,8 +25,9 @@ def reconstruct_trip(tickets, length):
     for t in tickets:
         hash_table_insert(hashtable, t.source, t.destination)
 
-    
-    print(result)
+    for n in hashtable.storage:
+        print(n)
+
 
 
 tickets = [
