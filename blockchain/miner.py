@@ -29,8 +29,9 @@ def proof_of_work(last_proof):
     p = f'{last_proof}'.encode()
     last_hash = hashlib.sha256(p).hexdigest()
 
+
     while valid_proof(last_hash, proof) is False:
-        proof = numpy.random.randint(2147483648)
+        proof = random.randint(-2147483648, 2147483648)
 
 
     print("Proof found: " + str(proof) + " in " + str(timer() - start))
@@ -50,8 +51,8 @@ def valid_proof(last_hash, proof):
     p = f'{proof}'.encode()
     new_proof_hash = hashlib.sha256(p).hexdigest()
 
-    
-    return last_hash[6:] == new_proof_hash[:6]
+    #print(new_proof_hash, new_proof_hash[:6])
+    return last_hash[-6:] == new_proof_hash[:6]
 
 
 
