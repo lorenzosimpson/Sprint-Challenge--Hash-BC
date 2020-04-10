@@ -52,7 +52,7 @@ def valid_proof(last_hash, proof):
     new_proof_hash = hashlib.sha256(p).hexdigest()
 
     #print(new_proof_hash, new_proof_hash[:6])
-    return last_hash[-6:] == new_proof_hash[:6]
+    return last_hash[-5:] == new_proof_hash[:5]
 
 
 
@@ -79,6 +79,7 @@ if __name__ == '__main__':
         # Get the last proof from the server
         r = requests.get(url=node + "/last_proof")
         data = r.json()
+        print(data)
         new_proof = proof_of_work(data.get('proof'))
 
         post_data = {"proof": new_proof,
